@@ -1,0 +1,22 @@
+{
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://packagist.phpcomposer.com"
+    }
+  },
+  "require": {
+    "ext-json": "*",
+    "ext-pdo": "*",
+    "ext-xdebug": "*"
+  },
+  "require-dev": {},
+  "autoload": {
+    "psr-4": {
+      "GemsManager\\": "src/",
+      "GemsManager\\Controller\\": "src/controller",
+      "GemsManager\\Service\\": "src/service",
+      "GemsManager\\Repository\\": "src/repository"
+    }
+  }
+}
