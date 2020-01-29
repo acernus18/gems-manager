@@ -26,14 +26,7 @@ function loadExcelToJSON(file, callback) {
     let reader = new FileReader();
     reader.onload = () => {
         let workBook = X.read(reader.result, {type: "binary"});
-
-        let result = [];
-        for (let i = 0; i < workBook.SheetNames[0].length; i++) {
-            let temp = X.utils.sheet_to_json(workBook.Sheets[workBook.SheetNames[i]]);
-            if (temp.length !== 0) {
-                result.push(temp);
-            }
-        }
+        let result = X.utils.sheet_to_json(workBook.Sheets[workBook.SheetNames[0]]);
         callback(result);
     };
     reader.readAsBinaryString(file);

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import ViewUI from 'view-design';
+
 import 'view-design/dist/styles/iview.css';
+import 'handsontable/dist/handsontable.full.css';
 
 import App from './App.vue'
 import router from './router'

@@ -1,7 +1,9 @@
 export default {
+    Encode: encode,
     Decode: decode,
-    ConvertPurchaseOrder: convertPurchaseOrder,
     ParseGemName: parseGemName,
+    ReadPurchaseRecords: readPurchaseRecords,
+    WritePurchaseOrder: writePurchaseOrder,
 }
 
 function getTypeAndColor(name) {
@@ -61,69 +63,92 @@ function getTypeAndColor(name) {
     return result;
 }
 
-function decode(code) {
+function encode(value) {
+    let valueString = value.toString();
+    const SuffixMapper = ["A", "B", "C", "D", "E", "F"];
+    const CodeMapper = ["V", "H", "K", "L", "M", "N", "R", "S", "T", "U"];
+    let suffix = SuffixMapper[valueString.length - 1];
+    valueString = valueString.substring(0, valueString.length - 1);
+
     let result = "";
-    let CodeMapper = {
-        'V': 0, 'H': 1, 'K': 2, 'L': 3, 'M': 4,
-        'N': 5, 'R': 6, 'S': 7, 'T': 8, 'U': 9,
-    };
+    for (let i = 0; i < valueString.length; i++) {
+        result += CodeMapper[parseInt(valueString[i])];
+    }
+    result += suffix;
+    if (Math.random() > 0.3) {
+        result += CodeMapper[Math.floor(Math.random() * 10)]
+    }
+    return result;
+}
 
-    let RepeatMapper = {
-        'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6,
-    };
-
+function decode(code) {
+    let result = 0;
+    const CodeMapper = ["V", "H", "K", "L", "M", "N", "R", "S", "T", "U"];
+    const RepeatMapper = ["B", "C", "D", "E", "F"];
     for (let i = 0; i < code.length; i++) {
-        if (code[i] in CodeMapper) {
-            result += CodeMapper[code[i]];
-            continue;
-        }
-
-        if (code[i] in RepeatMapper) {
-            result += "0".repeat(RepeatMapper[code[i]] - result.length);
+        if (CodeMapper.includes(code[i])) {
+            result = result * 10 + CodeMapper.indexOf(code[i]);
+        } else if (RepeatMapper.includes(code[i])) {
+            result += 10 * (RepeatMapper.indexOf(code[i]) + 2 - result.toString().length);
             break;
         }
     }
-    return parseInt(result);
+    return result;
 }
 
 function parseGemName(gemName) {
-    let result = new Map();
+    let result = {};
 
     let matches = /^.*?\W?([VHKLMNRSTUBCDEF]+)\W?.*$/.exec(gemName);
     if (matches !== null) {
-        result.set("code", matches[1]);
+        result["code"] = matches[1];
     }
 
     matches = /^.*(\d+\.\d+).*$/.exec(gemName);
     if (matches !== null) {
-        result.set("weight", matches[1]);
+        result["weight"] = matches[1];
     }
 
     matches = /^\s*([^VHKLMNRSTUBCDEF\s]+).*$/.exec(gemName);
     if (matches !== null) {
-        result.set("name", matches[1]);
+        result["name"] = matches[1];
     }
 
     if (result.has("code")) {
-        result.set("cost", decode(result["code"]));
+        result["cost"] = decode(result["code"]);
     }
 
     return result;
 }
 
-function convertPurchaseOrder(original) {
+function readPurchaseRecords(excelData) {
     let result = [];
-
-    for (let i = 0; i < original.length; i++) {
-        let row = original[i];
+    for (let i = 0; i < excelData.length; i++) {
+        let row = excelData[i];
         let gemID = row["石号"];
         let name = row["石名称"];
-        let number = parseInt(row["石数"]);
+        let number = row["石数"];
         let code = row["石编码"];
-        let weight = parseFloat(row["石重"]);
+        let weight = row["石重"];
         let vendor = row["供货商"];
         let certification = row["证书类别"];
         let price = row["销售价"];
+        result.push([gemID, name, number, code, weight, vendor, certification, price]);
+    }
+    return result;
+}
+
+function writePurchaseOrder(records) {
+    let result = [];
+    for (let i = 0; i < records.length; i++) {
+        let gemID = records[i][0];
+        let name = records[i][1];
+        let number = parseInt(records[i][2]);
+        let code = records[i][3];
+        let weight = parseFloat(records[i][4]);
+        let vendor = records[i][5];
+        let certification = records[i][6];
+        let price = records[i][7];
 
         let average = (weight / number).toFixed(2);
         let unitCost = decode(code);
@@ -155,6 +180,5 @@ function convertPurchaseOrder(original) {
 
         result.push(temp);
     }
-
     return result;
 }
