@@ -1,8 +1,5 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import About from '../views/About.vue'
-import OrderEditor from "../views/OrderEditor";
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
@@ -10,17 +7,17 @@ const routes = [
     {
         path: '/',
         name: 'home',
-        component: Home
+        component: () => import("../views/Home"),
     },
     {
         path: '/about',
         name: 'about',
-        component: About
+        component: () => import("../views/About"),
     },
     {
         path: "/order/editor",
         name: "OrderEditor",
-        component: OrderEditor
+        component: () => import("../views/orders/OrderEditor"),
     }
 ];
 

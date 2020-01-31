@@ -1,6 +1,9 @@
 <template>
     <div class="about">
-        <h1>This is an about page</h1>
+        <Breadcrumb :style="{margin: '20px 0'}">
+            <BreadcrumbItem>About</BreadcrumbItem>
+        </Breadcrumb>
+        <p>This is an about page</p>
     </div>
 </template>
 

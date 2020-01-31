@@ -2,18 +2,31 @@
     <div class="layout">
         <Layout>
             <Header>
-                <Row align="middle" justify="end">
+                <Row align="middle" type="flex" :gutter="16">
+                    <i-col>
+                        <a href="/"><h1>GemsManager系统</h1></a>
+                    </i-col>
                     <i-col>
                         <Menu mode="horizontal" active-name="1" theme="dark">
-                            <menu-item name="1" to="/">Table</menu-item>
-                            <menu-item name="2" to="/about">Converter</menu-item>
-                            <Submenu name="3">
+                            <Submenu name="1">
                                 <template slot="title">
-                                    提货
+                                    订单管理
                                 </template>
                                 <MenuGroup title="编辑">
-                                    <menu-item name="3-1" to="/order/editor">提货单编辑</menu-item>
-                                    <menu-item name="3-2">提货单管理</menu-item>
+                                    <menu-item name="1-1" to="/order/editor">提货单编辑</menu-item>
+                                    <menu-item name="1-2">提货单管理</menu-item>
+                                </MenuGroup>
+                            </Submenu>
+                            <Submenu name="2">
+                                <template slot="title">
+                                    销售管理
+                                </template>
+                                <MenuGroup title="查询">
+                                    <menu-item name="2-1">销售记录查询</menu-item>
+                                    <menu-item name="2-2">销售记录统计</menu-item>
+                                </MenuGroup>
+                                <MenuGroup title="工具">
+                                    <menu-item name="2-3">销售单计算器</menu-item>
                                 </MenuGroup>
                             </Submenu>
                         </Menu>
@@ -21,11 +34,6 @@
                 </Row>
             </Header>
             <Content :style="{padding: '0 50px'}">
-                <Breadcrumb :style="{margin: '20px 0'}">
-                    <BreadcrumbItem>Home</BreadcrumbItem>
-                    <BreadcrumbItem>Components</BreadcrumbItem>
-                    <BreadcrumbItem>Layout</BreadcrumbItem>
-                </Breadcrumb>
                 <router-view/>
             </Content>
             <Footer class="footer">2011-2016 &copy; Maples</Footer>
