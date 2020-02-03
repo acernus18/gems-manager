@@ -14,10 +14,10 @@
   "require-dev": {},
   "autoload": {
     "psr-4": {
-      "GemsManager\\": "src/",
       "GemsManager\\Controller\\": "src/controller",
       "GemsManager\\Service\\": "src/service",
-      "GemsManager\\Repository\\": "src/repository"
+      "GemsManager\\Repository\\": "src/repository",
+      "GemsManager\\Utility": "src/utility"
     }
   }
 }
