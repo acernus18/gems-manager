@@ -34,18 +34,14 @@ abstract class BaseRepository
         return $result;
     }
 
-    protected function insert(string $statement, array $parameters = null): array
+    protected function insert(string $statement, array $parameters): array
     {
         return $this->transactional(function (PDO $connection) use ($statement, $parameters) {
             $result = [];
             $executor = $connection->prepare($statement);
-            if ($parameters === null) {
-                $executor->execute();
-            } else {
-                foreach ($parameters as $parameter) {
-                    $executor->execute($parameter);
-                    $result[] = $connection->lastInsertId();
-                }
+            foreach ($parameters as $parameter) {
+                $executor->execute($parameter);
+                $result[] = $connection->lastInsertId();
             }
             return $result;
         });

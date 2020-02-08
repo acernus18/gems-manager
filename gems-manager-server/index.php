@@ -4,7 +4,7 @@ use GemsManager\Controller\HealthController;
 
 require_once "vendor/autoload.php";
 
-if (preg_match("/^\/(.+?)\/(.+?)\?.*$/", $_SERVER["REQUEST_URI"], $matches)) {
+if (preg_match("/^\/api\/(.+?)\/(.+?)\?.*$/", $_SERVER["REQUEST_URI"], $matches)) {
     $controller = $matches[1];
     $method = $matches[2];
 

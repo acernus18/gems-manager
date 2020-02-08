@@ -18,6 +18,11 @@ const routes = [
         path: "/order/editor",
         name: "OrderEditor",
         component: () => import("../views/orders/OrderEditor"),
+    },
+    {
+        path: "/sales/search",
+        name: "SalesSearch",
+        component: () => import("../views/sales/SalesSearch"),
     }
 ];
 

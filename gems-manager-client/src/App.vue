@@ -22,7 +22,7 @@
                                     销售管理
                                 </template>
                                 <MenuGroup title="查询">
-                                    <menu-item name="2-1">销售记录查询</menu-item>
+                                    <menu-item name="2-1" to="/sales/search">销售记录查询</menu-item>
                                     <menu-item name="2-2">销售记录统计</menu-item>
                                 </MenuGroup>
                                 <MenuGroup title="工具">
