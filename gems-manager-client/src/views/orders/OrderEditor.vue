@@ -1,6 +1,7 @@
 <template>
     <div>
         <Breadcrumb :style="{margin: '20px 0'}">
+            <BreadcrumbItem>首页</BreadcrumbItem>
             <BreadcrumbItem>提货</BreadcrumbItem>
             <BreadcrumbItem>提货单编辑</BreadcrumbItem>
         </Breadcrumb>
@@ -8,6 +9,9 @@
             <p slot="title">提货单操作</p>
             <Button style="margin-right: 10px" icon="ios-download-outline" @click="importDataFromExcel">
                 从Excel表格中导入提货单
+            </Button>
+            <Button style="margin-right: 10px" icon="ios-download-outline" @click="exportPurchaseOrder">
+                保存提货单
             </Button>
             <Button icon="ios-download-outline" @click="exportDataToExcel">
                 导出百智慧导入文件
@@ -68,6 +72,9 @@
                 } else {
                     this.$Message.info("There are nothing to export");
                 }
+            },
+            exportPurchaseOrder: function () {
+                CommonUtils.ExportJSONToExcel(BusinessUtils.ExportPurchaseOrder(this.tableData));
             }
         },
         data: function () {

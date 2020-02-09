@@ -1,20 +1,20 @@
 <template>
     <div class="home">
         <Breadcrumb :style="{margin: '20px 0'}">
-            <BreadcrumbItem>Home</BreadcrumbItem>
-            <BreadcrumbItem>HelloWorld</BreadcrumbItem>
+            <BreadcrumbItem>首页</BreadcrumbItem>
+            <BreadcrumbItem>Dashboard</BreadcrumbItem>
         </Breadcrumb>
-        <HelloWorld msg="Welcome to Your Vue.js App"/>
+        <Card>
+            <p slot="title">欢迎使用GemsManager系统</p>
+            <p></p>
+        </Card>
     </div>
 </template>
 
 <script>
-    import HelloWorld from '../components/HelloWorld.vue'
 
     export default {
         name: 'home',
-        components: {
-            HelloWorld
-        }
+        components: {}
     }
 </script>

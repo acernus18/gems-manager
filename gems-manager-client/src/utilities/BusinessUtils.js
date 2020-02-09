@@ -4,6 +4,7 @@ export default {
     ParseGemName: parseGemName,
     ReadPurchaseRecords: readPurchaseRecords,
     WritePurchaseOrder: writePurchaseOrder,
+    ExportPurchaseOrder: exportPurchaseOrder,
 }
 
 function getTypeAndColor(name) {
@@ -134,6 +135,23 @@ function readPurchaseRecords(excelData) {
         let certification = row["证书类别"];
         let price = row["销售价"];
         result.push([gemID, name, number, code, weight, vendor, certification, price]);
+    }
+    return result;
+}
+
+function exportPurchaseOrder(records) {
+    let result = [];
+    for (let i = 0; i < records.length; i++) {
+        let row = {};
+        row["石号"] = records[i][0];
+        row["石名称"] = records[i][1];
+        row["石数"] = parseInt(records[i][2]);
+        row["石编码"] = records[i][3];
+        row["石重"] = parseFloat(records[i][4]);
+        row["供货商"] = records[i][5];
+        row["证书类别"] = records[i][6];
+        row["销售价"] = records[i][7];
+        result.push(row);
     }
     return result;
 }

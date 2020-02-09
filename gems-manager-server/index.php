@@ -1,10 +1,11 @@
 <?php
 
 use GemsManager\Controller\HealthController;
+use GemsManager\Controller\SearchController;
 
 require_once "vendor/autoload.php";
 
-if (preg_match("/^\/api\/(.+?)\/(.+?)\?.*$/", $_SERVER["REQUEST_URI"], $matches)) {
+if (preg_match("/^\/api\/(.+?)\/([^?]+)\??.*$/", $_SERVER["REQUEST_URI"], $matches)) {
     $controller = $matches[1];
     $method = $matches[2];
 
@@ -13,11 +14,14 @@ if (preg_match("/^\/api\/(.+?)\/(.+?)\?.*$/", $_SERVER["REQUEST_URI"], $matches)
         case "health":
             $invoker = new HealthController();
             break;
+        case "search":
+            $invoker = new SearchController();
+            break;
         default:
             break;
     }
 
-    if ($invoker !== null) {
+    if ($invoker !== null && method_exists($invoker, $method)) {
         header("Content-Type: application/json");
         echo json_encode($invoker->$method());
     } else {
