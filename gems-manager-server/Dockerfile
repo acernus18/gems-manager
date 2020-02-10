@@ -1,8 +1,11 @@
 FROM php:7.1-fpm
 WORKDIR /var/www/html
 
-COPY index.php composer.json composer.lock composer.phar ./
+COPY index.php composer.json ./
 COPY src/ resources/ ./
 
-RUN docker-php-ext-install pdo pdo_mysql sockets && pecl install xdebug && docker-php-ext-enable xdebug
-RUN php composer.phar install
+RUN docker-php-ext-install pdo pdo_mysql sockets \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php && php composer.phar install
