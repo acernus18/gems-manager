@@ -17,7 +17,7 @@
       "GemsManager\\Controller\\": "src/controller",
       "GemsManager\\Service\\": "src/service",
       "GemsManager\\Repository\\": "src/repository",
-      "GemsManager\\Utility": "src/utility"
+      "GemsManager\\Utility\\": "src/utility"
     }
   }
 }

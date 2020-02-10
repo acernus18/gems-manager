@@ -25,4 +25,6 @@ yarn-error.log*
 *.iml
 
 # PHP
+composer.lock
+composer.phar
 vendor/
