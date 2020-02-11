@@ -52,6 +52,14 @@
                         title: "客户",
                         key: "sold_to",
                     },
+                    {
+                        title: "克拉价",
+                        key: "gem_unit_price",
+                    },
+                    {
+                        title: "实销价格",
+                        key: "gem_real_price",
+                    }
                 ],
                 tableData: [],
             }
