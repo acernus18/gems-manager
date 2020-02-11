@@ -1,8 +1,7 @@
 FROM php:7.1-fpm
 WORKDIR /var/www/html
 
-COPY index.php composer.json ./
-COPY src/ resources/ ./
+COPY index.php composer.json src resources ./
 
 RUN docker-php-ext-install pdo_mysql sockets \
     && pecl install xdebug \
