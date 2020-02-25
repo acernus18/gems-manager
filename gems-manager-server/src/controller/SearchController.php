@@ -37,6 +37,12 @@ class SearchController
                     break;
             }
         }
+
+        // Remove H:i:s information
+        for ($i = 0; $i < count($result["value"]); $i++) {
+            $result["value"][$i]["sold_time"] = date("Y-m-d", strtotime($result["value"][$i]["sold_time"]));
+        }
+
         return $result;
     }
 

@@ -12,24 +12,28 @@ function httpRequest(options) {
     JQuery.ajax(options);
 }
 
-function openFileSelector(fileHandler) {
-    let input = document.createElement("input");
-    input.type = "file";
-    input.click();
-    input.onchange = () => {
-        let file = input.files[0];
-        fileHandler(file);
-    }
+function openFileSelector() {
+    return new Promise(resolve => {
+        let input = document.createElement("input");
+        input.type = "file";
+        input.click();
+        input.onchange = () => {
+            let file = input.files[0];
+            resolve(file);
+        }
+    });
 }
 
-function loadExcelToJSON(file, callback) {
-    let reader = new FileReader();
-    reader.onload = () => {
-        let workBook = X.read(reader.result, {type: "binary"});
-        let result = X.utils.sheet_to_json(workBook.Sheets[workBook.SheetNames[0]]);
-        callback(result);
-    };
-    reader.readAsBinaryString(file);
+function loadExcelToJSON(file) {
+    return new Promise(resolve => {
+        let reader = new FileReader();
+        reader.onload = () => {
+            let workBook = X.read(reader.result, {type: "binary"});
+            let result = X.utils.sheet_to_json(workBook.Sheets[workBook.SheetNames[0]]);
+            resolve(result);
+        };
+        reader.readAsBinaryString(file);
+    });
 }
 
 function exportJSONToExcel(object, filename = "output.xlsx") {

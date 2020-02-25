@@ -56,13 +56,11 @@
                 localStorage.removeItem(TABLE_DATA_KEY);
                 this.$Message.success("清空成功");
             },
-            importDataFromExcel: function () {
-                CommonUtils.OpenFileSelector(file => {
-                    CommonUtils.LoadExcelToJSON(file, data => {
-                        this.tableData = BusinessUtils.ReadPurchaseRecords(data);
-                        this.$Message.success("导入成功");
-                    });
-                });
+            importDataFromExcel: async function () {
+                let file = await CommonUtils.OpenFileSelector();
+                let data = await CommonUtils.LoadExcelToJSON(file);
+                this.tableData = BusinessUtils.ReadPurchaseRecords(data);
+                this.$Message.success("导入成功");
             },
             exportDataToExcel: function () {
                 let records = this.tableData.slice(0, this.tableData.length - 1);
@@ -83,7 +81,7 @@
                 settings: {
                     rowHeaders: true,
                     colHeaders: ["石号", "石名称", "石数", "石编码", "石重", "供货商", "证书类别", "销售价"],
-                    height: 300,
+                    height: "58vh",
                     minSpareRows: 1,
                     stretchH: "all",
                     manualColumnResize: true,

@@ -23,4 +23,9 @@ class HealthController
         socket_close($socket);
         return $result;
     }
+
+    public function test()
+    {
+        return simplexml_load_file("resources/mapper.xml");
+    }
 }

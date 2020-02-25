@@ -18,7 +18,7 @@
             </label>
             <Button @click="search">查询</Button>
         </Card>
-        <Table border :columns="tableColumns" :data="tableData"/>
+        <Table :loading="loading" border :columns="tableColumns" :data="tableData" />
     </div>
 </template>
 
@@ -29,6 +29,7 @@
         name: "SalesSearch",
         data: function () {
             return {
+                loading: false,
                 key: "gemID",
                 value: "",
                 tableColumns: [
@@ -66,10 +67,10 @@
         },
         methods: {
             search: async function () {
-                this.$Message.info("查询中");
+                this.loading = true;
                 let data = await DataRequester.QuerySalesRecords(this.key, this.value);
                 this.tableData = data["value"];
-                this.$Message.success("查询成功");
+                this.loading = false;
             }
         },
     }

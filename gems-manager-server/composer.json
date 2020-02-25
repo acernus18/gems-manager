@@ -9,7 +9,8 @@
     "ext-json": "*",
     "ext-pdo": "*",
     "ext-xdebug": "*",
-    "ext-sockets": "*"
+    "ext-sockets": "*",
+    "ext-simplexml": "*"
   },
   "require-dev": {},
   "autoload": {
