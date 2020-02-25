@@ -32,6 +32,7 @@
     import HotTable from '@handsontable/vue';
     import CommonUtils from "../../utilities/CommonUtils";
     import BusinessUtils from "../../utilities/BusinessUtils";
+    import ExcelUtils from "../../utilities/ExcelUtils";
 
     const TABLE_DATA_KEY = "tableData";
 
@@ -58,7 +59,7 @@
             },
             importDataFromExcel: async function () {
                 let file = await CommonUtils.OpenFileSelector();
-                let data = await CommonUtils.LoadExcelToJSON(file);
+                let data = await ExcelUtils.LoadExcelToJSON(file);
                 this.tableData = BusinessUtils.ReadPurchaseRecords(data);
                 this.$Message.success("导入成功");
             },
@@ -66,13 +67,13 @@
                 let records = this.tableData.slice(0, this.tableData.length - 1);
 
                 if (records.length > 0) {
-                    CommonUtils.ExportJSONToExcel(BusinessUtils.WritePurchaseOrder(records));
+                    ExcelUtils.ExportJSONToExcel(BusinessUtils.WritePurchaseOrder(records));
                 } else {
                     this.$Message.info("There are nothing to export");
                 }
             },
             exportPurchaseOrder: function () {
-                CommonUtils.ExportJSONToExcel(BusinessUtils.ExportPurchaseOrder(this.tableData));
+                ExcelUtils.ExportJSONToExcel(BusinessUtils.ExportPurchaseOrder(this.tableData));
             }
         },
         data: function () {
