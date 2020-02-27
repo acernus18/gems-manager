@@ -4,6 +4,8 @@
 namespace GemsManager\Controller;
 
 
+use GemsManager\Service\BusinessService;
+
 class HealthController
 {
     public function healthCheck()
@@ -13,14 +15,11 @@ class HealthController
 
     public function checkServerStatus()
     {
+        $businessService = new BusinessService();
         $result = ["errorCode" => 1, "message" => "fail", "value" => "fail"];
-        $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-
-        if (socket_connect($socket, "lisimin16.eicp.net", 35890)) {
+        if ($businessService->checkServer()) {
             $result = ["errorCode" => 0, "message" => "success", "value" => "success"];
         }
-
-        socket_close($socket);
         return $result;
     }
 

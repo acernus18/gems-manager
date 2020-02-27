@@ -10,19 +10,14 @@ const routes = [
         component: () => import("../views/Home"),
     },
     {
-        path: '/about',
-        name: 'about',
-        component: () => import("../views/About"),
-    },
-    {
         path: "/order/editor",
         name: "OrderEditor",
-        component: () => import("../views/orders/OrderEditor"),
+        component: () => import("../views/orders/EditOrder"),
     },
     {
         path: "/sales/search",
         name: "SalesSearch",
-        component: () => import("../views/sales/SalesSearch"),
+        component: () => import("../views/sales/SearchSales"),
     }
 ];
 

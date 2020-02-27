@@ -6,6 +6,17 @@ namespace GemsManager\Service;
 
 class BusinessService
 {
+    public function checkServer(): bool
+    {
+        $result = false;
+        $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+        if (socket_connect($socket, "lisimin16.eicp.net", 35890)) {
+            $result = true;
+        }
+        socket_close($socket);
+        return $result;
+    }
+
     public function decode(string $code): int
     {
         $CodeMapper = ["V", "H", "K", "L", "M", "N", "R", "S", "T", "U"];

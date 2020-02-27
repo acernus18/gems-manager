@@ -1,10 +1,5 @@
 <template>
     <div>
-        <Breadcrumb :style="{margin: '20px 0'}">
-            <BreadcrumbItem>首页</BreadcrumbItem>
-            <BreadcrumbItem>提货</BreadcrumbItem>
-            <BreadcrumbItem>提货单编辑</BreadcrumbItem>
-        </Breadcrumb>
         <Card style="margin: 0 0 10px 0">
             <p slot="title">提货单操作</p>
             <Button style="margin-right: 10px" icon="ios-download-outline" @click="importDataFromExcel">
@@ -30,15 +25,15 @@
 
 <script>
     import HotTable from '@handsontable/vue';
-    import CommonUtils from "../../utilities/CommonUtils";
-    import BusinessUtils from "../../utilities/BusinessUtils";
-    import ExcelUtils from "../../utilities/ExcelUtils";
+    import CommonUtils from "../utilities/CommonUtils";
+    import BusinessUtils from "../utilities/BusinessUtils";
+    import ExcelUtils from "../utilities/ExcelUtils";
 
     const TABLE_DATA_KEY = "tableData";
 
     export default {
         components: {
-            HotTable
+            HotTable,
         },
         mounted: function () {
             if (localStorage.getItem(TABLE_DATA_KEY) !== null) {

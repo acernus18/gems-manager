@@ -1,10 +1,5 @@
 <template>
     <div>
-        <Breadcrumb :style="{margin: '20px 0'}">
-            <BreadcrumbItem>首页</BreadcrumbItem>
-            <BreadcrumbItem>销售</BreadcrumbItem>
-            <BreadcrumbItem>销售记录查询</BreadcrumbItem>
-        </Breadcrumb>
         <Card style="margin: 0 0 10px 0">
             <p slot="title">提货单操作</p>
             <label>
@@ -18,15 +13,15 @@
             </label>
             <Button @click="search">查询</Button>
         </Card>
-        <Table :loading="loading" border :columns="tableColumns" :data="tableData" />
+        <Table :loading="loading" border :columns="tableColumns" :data="tableData"/>
     </div>
 </template>
 
 <script>
-    import DataRequester from "../../utilities/DataRequester";
+    import DataRequester from "../utilities/DataRequester";
 
     export default {
-        name: "SalesSearch",
+        name: "SalesSearchTable",
         data: function () {
             return {
                 loading: false,
