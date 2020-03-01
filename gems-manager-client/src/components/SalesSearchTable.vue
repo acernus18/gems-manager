@@ -63,8 +63,7 @@
         methods: {
             search: async function () {
                 this.loading = true;
-                let data = await DataRequester.QuerySalesRecords(this.key, this.value);
-                this.tableData = data["value"];
+                this.tableData = await DataRequester.QuerySalesRecords(this.key, this.value);
                 this.loading = false;
             }
         },

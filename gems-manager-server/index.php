@@ -1,6 +1,7 @@
-<?php
+<?php session_start();
 
 use GemsManager\Controller\HealthController;
+use GemsManager\Controller\PassportController;
 use GemsManager\Controller\SearchController;
 
 require_once "vendor/autoload.php";
@@ -16,6 +17,9 @@ if (preg_match("/^\/api\/(.+?)\/([^?]+)\??.*$/", $_SERVER["REQUEST_URI"], $match
             break;
         case "search":
             $invoker = new SearchController();
+            break;
+        case "passport":
+            $invoker = new PassportController();
             break;
         default:
             break;

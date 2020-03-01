@@ -30,11 +30,11 @@ function getJSON(url, data = null) {
 function postJSON(url, data) {
     return new Promise(resolve => {
         let request = new XMLHttpRequest();
+        request.open("POST", url);
         request.setRequestHeader("Content-Type", "application/json");
         request.onloadend = function () {
             resolve(JSON.parse(request.responseText));
         };
-        request.open("POST", url);
         request.send(JSON.stringify(data));
     });
 }

@@ -4,13 +4,27 @@
         <div v-if="isResult">
             <Collapse simple>
                 <Panel  v-for="item in searchResult" :key="item.id">
-                    {{item["gem_name"]}}
+                    {{item["gem_weight"]}}ct
+                    {{item["sold_to"].length > 5 ? item["sold_to"].substr(0, 5) + "..." : item["sold_to"]}}
+                    {{item["gem_unit_price"]}}/ct
                     <p slot="content">
                         <List>
-                            <ListItem>销售时间 {{item["sold_time"]}}</ListItem>
-                            <ListItem>克拉价格 {{item["gem_unit_price"]}}</ListItem>
-                            <ListItem>销售总价 {{item["gem_total_price"]}}</ListItem>
-                            <ListItem>实销金额 {{item["gem_real_price"]}}</ListItem>
+                            <ListItem>
+                                <strong>名称：</strong>
+                                <span>{{item["gem_name"]}}</span>
+                            </ListItem>
+                            <ListItem>
+                                <strong>重量：</strong>
+                                <span>{{item["gem_weight"]}}</span>
+                            </ListItem>
+                            <ListItem>
+                                <strong>实销金额：</strong>
+                                <span>{{item["gem_real_price"]}}</span>
+                            </ListItem>
+                            <ListItem>
+                                <strong>销售时间：</strong>
+                                <span>{{item["sold_time"]}}</span>
+                            </ListItem>
                         </List>
                     </p>
                 </Panel>
@@ -53,8 +67,7 @@
         methods: {
             search: async function () {
                 this.$Message.info("正在查询");
-                let data = await DataRequester.QuerySalesRecords(this.searchKey, this.searchValue);
-                this.searchResult = data["value"];
+                this.searchResult = await DataRequester.QuerySalesRecords(this.searchKey, this.searchValue);
                 this.isResult = true;
             }
         }
