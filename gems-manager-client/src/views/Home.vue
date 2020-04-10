@@ -1,13 +1,21 @@
 <template>
     <div v-if="isMobile">
         <Layout>
-            <Header style="margin-bottom: 10px"/>
+            <Menu mode="horizontal" theme="light" active-name="1">
+                <menu-item name="1">
+                    <Icon type="ios-paper" />
+                    订单查询
+                </menu-item>
+                <menu-item name="2">
+                    <Icon type="ios-people" />
+                    开单计算器
+                </menu-item>
+            </Menu>
             <Content style="padding: 10px;background: #f8f8f9">
                 <Card style="margin-bottom: 10px">
                     <CellGroup>
-                        <Spin v-if="loading"></Spin>
-                        <!--<Cell v-else title="服务器状态" extra="serverStatus" />-->
-                        <Row>
+                        <Spin v-if="loading" />
+                        <Row v-else>
                             <i-col span="8">服务器状态</i-col>
                             <i-col span="4" offset="12">{{serverStatus}}</i-col>
                         </Row>
