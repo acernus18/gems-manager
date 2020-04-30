@@ -4,22 +4,22 @@
         <div v-if="isResult">
             <Collapse simple>
                 <Panel  v-for="item in searchResult" :key="item.id">
-                    {{item["gem_weight"]}}ct
+                    {{item["weight"]}}ct
                     {{item["sold_to"].length > 5 ? item["sold_to"].substr(0, 5) + "..." : item["sold_to"]}}
-                    {{item["gem_unit_price"]}}/ct
+                    {{item["unit_price"]}}/ct
                     <p slot="content">
                         <List>
                             <ListItem>
                                 <strong>名称：</strong>
-                                <span>{{item["gem_name"]}}</span>
+                                <span>{{item["gem_info"]}}</span>
                             </ListItem>
                             <ListItem>
                                 <strong>重量：</strong>
-                                <span>{{item["gem_weight"]}}</span>
+                                <span>{{item["weight"]}}</span>
                             </ListItem>
                             <ListItem>
                                 <strong>实销金额：</strong>
-                                <span>{{item["gem_real_price"]}}</span>
+                                <span>{{item["real_price"]}}</span>
                             </ListItem>
                             <ListItem>
                                 <strong>销售时间：</strong>
