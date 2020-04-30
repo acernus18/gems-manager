@@ -38,11 +38,11 @@
                     },
                     {
                         title: "石名称",
-                        key: "gem_name",
+                        key: "gem_info",
                     },
                     {
                         title: "石重",
-                        key: "gem_weight",
+                        key: "weight",
                     },
                     {
                         title: "客户",
@@ -50,11 +50,11 @@
                     },
                     {
                         title: "克拉价",
-                        key: "gem_unit_price",
+                        key: "unit_price",
                     },
                     {
                         title: "实销价格",
-                        key: "gem_real_price",
+                        key: "real_price",
                     }
                 ],
                 tableData: [],

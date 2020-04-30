@@ -13,7 +13,7 @@ abstract class BaseRepository
         $host = "120.78.175.39";
         $port = "30001";
         $dbname = "db_jewelry";
-        $charset = "utf8mb4";
+        $charset = "utf8";
         $dataSourceName = "mysql:host=$host;dbname=$dbname;port=$port;charset=$charset";
         return new PDO($dataSourceName, "root", "dev#pass");
     }
