@@ -11,6 +11,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: dev#pass
     volumes:
-    - "db_date:/var/lib/mysql"
+    - "db_data:/var/lib/mysql"
 volumes:
-  db_date:
+  db_data:

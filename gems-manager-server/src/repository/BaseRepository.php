@@ -10,7 +10,7 @@ abstract class BaseRepository
 {
     protected function connect(): PDO
     {
-        $host = "db";
+        $host = "database";
         $port = "3306";
         $dbname = "db_gems_manager";
         $charset = "utf8";
