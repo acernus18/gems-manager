@@ -2,6 +2,7 @@ export default {
     OpenFileSelector: openFileSelector,
     DetectMobile: detectMobile,
     IdentifyBrowser: identifyBrowser,
+    ExportArrayToCSV: exportArrayToCSV,
 }
 
 function openFileSelector() {
@@ -14,6 +15,22 @@ function openFileSelector() {
             resolve(file);
         }
     });
+}
+
+function exportArrayToCSV(elements, filename = "result.csv") {
+    let content = elements.map(e => e.join(",")).join("\n");
+    let blob = new Blob([content], {type: "text/csv;charset=utf-8;"});
+
+    let link = document.createElement("a");
+    if (link.download !== undefined) {
+        let url = URL.createObjectURL(blob);
+        link.setAttribute("href", url);
+        link.setAttribute("download", filename);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
 }
 
 function detectMobile() {

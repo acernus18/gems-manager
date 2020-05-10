@@ -22,6 +22,7 @@ class PassportController
         $password = addslashes($post["password"]);
         $token = sha1(sprintf("%s&%s&secret", $username, $password));
 
+        // zuriel&ltl19940912&secret
         if ($token === "b5ca928167363761d3f101c1f715b478b52a7ae6") {
             $_SESSION["user"] = [
                 "username" => $username,

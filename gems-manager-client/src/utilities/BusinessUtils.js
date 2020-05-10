@@ -1,3 +1,6 @@
+import ExcelUtils from "./ExcelUtils";
+import CommonUtils from "./CommonUtils";
+
 export default {
     Encode: encode,
     Decode: decode,
@@ -5,6 +8,8 @@ export default {
     ReadPurchaseRecords: readPurchaseRecords,
     WritePurchaseOrder: writePurchaseOrder,
     ExportPurchaseOrder: exportPurchaseOrder,
+    ReadSalesRecords: readSalesRecords,
+    ExportSalesRecordsToCSV: exportSalesRecordsToCSV,
 }
 
 function getTypeAndColor(name) {
@@ -199,4 +204,93 @@ function writePurchaseOrder(records) {
         result.push(temp);
     }
     return result;
+}
+
+function recogniseGemType(literalType) {
+    let mapper = new Map([
+        ["A红宝石", 0],
+        ["B斯里兰卡蓝宝石", 1],
+        ["C成品镶嵌", 2],
+        ["C蓝宝石", 3],
+        ["D代销裸石", 4],
+        ["d无烧鸽血红", 5],
+        ["EE有烧皇家蓝", 6],
+        ["E无烧皇家蓝", 7],
+        ["FF有烧矢车菊", 8],
+        ["F无烧矢车菊", 9],
+        ["G无烧蓝宝石", 10],
+        ["H无烧粉红蓝宝石", 11],
+        ["II无烧紫色蓝宝石", 12],
+        ["I无烧黄色蓝宝石", 13],
+        ["J代镶嵌加工费", 14],
+        ["J无烧帕帕拉恰蓝宝石", 15],
+        ["J镶嵌加工费", 16],
+        ["k无烧红宝石", 17],
+        ["K金素金", 18],
+        ["l有烧鸽血红", 19],
+        ["M祖母绿", 20],
+        ["N无油祖母绿", 21],
+        ["O哥伦比亚祖母绿", 22],
+        ["P帕帕拉恰蓝宝石", 23],
+        ["QQ紫色蓝宝石", 24],
+        ["Q粉红蓝宝石", 25],
+        ["R黄色蓝宝石", 26],
+        ["SS沙弗莱", 27],
+        ["T山东蓝宝石", 28],
+        ["U泰国蓝宝石", 29],
+        ["V猫眼", 30],
+        ["W变石猫眼", 31],
+        ["XX金绿宝石", 32],
+        ["X亚历山大变石", 33],
+        ["Y星光红宝石", 34],
+        ["ZZ珍珠", 35],
+        ["Z无烧橙色蓝宝石", 36],
+        ["Z星光蓝宝石", 37],
+        ["尖晶石", 38],
+        ["无烧变色蓝宝石", 39]
+    ]);
+
+    let result = -1;
+    if (mapper.has(literalType)) {
+        result = mapper.get(literalType)
+    }
+    return result;
+}
+
+function readSalesRecords(excelData) {
+    let result = [];
+    for (let i = 0; i < excelData.length; i++) {
+        let temp = {};
+        temp["sold_time"] = ExcelUtils.FormatDate(excelData[i]["日期"]);
+        temp["sold_id"] = excelData[i]["单号"];
+        temp["sold_to"] = excelData[i]["公司名称"];
+        temp["gem_id"] = excelData[i]["石号"];
+        temp["gem_info"] = excelData[i]["石名称"];
+        temp["gem_type"] = recogniseGemType(excelData[i]["石料"]);
+        temp["number"] = excelData[i]["石数"] ? excelData[i]["石数"] : 0;
+        temp["weight"] = excelData[i]["石重"];
+        temp["unit_price"] = excelData[i]["销售价"];
+        temp["real_price"] = excelData[i]["实销金额"];
+        result.push(temp);
+    }
+    return result;
+}
+
+function exportSalesRecordsToCSV(records) {
+    let elements = [];
+    for (let i = 0; i < records.length; i++) {
+        elements.push([
+            records[i]["sold_time"],
+            records[i]["sold_id"],
+            records[i]["sold_to"],
+            records[i]["gem_id"],
+            records[i]["gem_info"],
+            records[i]["gem_type"],
+            records[i]["number"],
+            records[i]["weight"],
+            records[i]["unit_price"],
+            records[i]["real_price"],
+        ]);
+    }
+    CommonUtils.ExportArrayToCSV(elements);
 }

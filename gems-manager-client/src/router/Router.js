@@ -26,6 +26,14 @@ const routes = [
         path: "/sales/search",
         name: "SalesSearch",
         component: () => import("../views/sales/SearchSales"),
+    },
+    {
+        path: "/sales/import",
+        name: "ImportSales",
+        component: () => import("../views/sales/ImportSales"),
+        meta: {
+            requiresAuth: true,
+        },
     }
 ];
 
