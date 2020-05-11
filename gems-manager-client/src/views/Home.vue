@@ -1,49 +1,21 @@
 <template>
-    <div v-if="isMobile">
+    <div class="layout" v-if="!isMobile">
         <Layout>
-            <Menu mode="horizontal" theme="light" active-name="1">
-                <menu-item name="1">
-                    <Icon type="ios-paper" />
-                    订单查询
-                </menu-item>
-                <menu-item name="2">
-                    <Icon type="ios-people" />
-                    开单计算器
-                </menu-item>
-            </Menu>
-            <Content style="padding: 10px;background: #f8f8f9">
-                <Card style="margin-bottom: 10px">
-                    <CellGroup>
-                        <Spin v-if="loading" />
-                        <Row v-else>
-                            <i-col span="8">服务器状态</i-col>
-                            <i-col span="4" offset="12">{{serverStatus}}</i-col>
-                        </Row>
-                    </CellGroup>
-                </Card>
-                <MobileSearchForm/>
+            <GemsHeader/>
+            <Content :style="{padding: '0 50px'}">
+                <div class="home">
+                    <Breadcrumb :style="{margin: '20px 0'}">
+                        <BreadcrumbItem>首页</BreadcrumbItem>
+                        <BreadcrumbItem>Dashboard</BreadcrumbItem>
+                    </Breadcrumb>
+                    <Card>
+                        <p slot="title">欢迎使用GemsManager系统</p>
+                        <p></p>
+                    </Card>
+                </div>
             </Content>
+            <GemsFooter/>
         </Layout>
-    </div>
-    <div v-else>
-        <div class="layout">
-            <Layout>
-                <GemsHeader/>
-                <Content :style="{padding: '0 50px'}">
-                    <div class="home">
-                        <Breadcrumb :style="{margin: '20px 0'}">
-                            <BreadcrumbItem>首页</BreadcrumbItem>
-                            <BreadcrumbItem>Dashboard</BreadcrumbItem>
-                        </Breadcrumb>
-                        <Card>
-                            <p slot="title">欢迎使用GemsManager系统</p>
-                            <p></p>
-                        </Card>
-                    </div>
-                </Content>
-                <GemsFooter/>
-            </Layout>
-        </div>
     </div>
 </template>
 
@@ -61,30 +33,22 @@
     import GemsHeader from "../components/GemsHeader";
     import GemsFooter from "../components/GemsFooter";
     import CommonUtils from "../utilities/CommonUtils";
-    import MobileSearchForm from "../components/MobileSearchForm";
-    import DataRequester from "../utilities/DataRequester";
+    import router from "../router/Router";
 
     export default {
-        components: {MobileSearchForm, GemsFooter, GemsHeader},
+        components: {GemsFooter, GemsHeader},
         data: function () {
-            return {
-                serverStatus: false,
-                loading: false,
-            };
+            return {};
         },
         mounted: function () {
-            this.checkServer();
-        },
-        methods: {
-            checkServer: async function () {
-                this.loading = true;
-                let result = await DataRequester.QueryServerStatus();
-                this.serverStatus = result === "success" ? "在线" : "离线";
-                this.loading = false;
+            if (this.isMobile) {
+                router.push("/mobile/sales/search");
             }
         },
         computed: {
-            isMobile: () => CommonUtils.DetectMobile(),
-        },
+            isMobile: function () {
+                return CommonUtils.DetectMobile();
+            }
+        }
     }
 </script>

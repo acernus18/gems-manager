@@ -34,7 +34,12 @@ const routes = [
         meta: {
             requiresAuth: true,
         },
-    }
+    },
+    {
+        path: "/mobile/sales/search",
+        name: "MobileSearchSales",
+        component: () => import("../views/mobile/MobileSearchSales"),
+    },
 ];
 
 const router = new VueRouter({routes});
