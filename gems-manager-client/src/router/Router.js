@@ -40,6 +40,11 @@ const routes = [
         name: "MobileSearchSales",
         component: () => import("../views/mobile/MobileSearchSales"),
     },
+    {
+        path: "/mobile/orders/calculator",
+        name: "MobileOrderCalculator",
+        component: () => import("../views/mobile/MobileOrderCalculator"),
+    },
 ];
 
 const router = new VueRouter({routes});

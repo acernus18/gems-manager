@@ -5,7 +5,7 @@
                 <Icon type="ios-paper"/>
                 订单查询
             </menu-item>
-            <menu-item name="2">
+            <menu-item name="2" to="/mobile/orders/calculator">
                 <Icon type="ios-people"/>
                 开单计算器
             </menu-item>
