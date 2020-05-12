@@ -33,7 +33,6 @@
     import GemsHeader from "../components/GemsHeader";
     import GemsFooter from "../components/GemsFooter";
     import CommonUtils from "../utilities/CommonUtils";
-    import router from "../router/Router";
 
     export default {
         components: {GemsFooter, GemsHeader},
@@ -42,7 +41,7 @@
         },
         mounted: function () {
             if (this.isMobile) {
-                router.push("/mobile/sales/search");
+                this.$route.push("/mobile/sales/search");
             }
         },
         computed: {

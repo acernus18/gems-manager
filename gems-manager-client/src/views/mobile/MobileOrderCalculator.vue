@@ -47,7 +47,6 @@
             return {
                 tableColumns: [
                     {
-                        title: "",
                         type: 'index',
                         width: 50,
                         align: 'center'
@@ -65,7 +64,8 @@
                     {
                         title: "价格",
                         key: "total",
-                        align: 'center'
+                        align: 'center',
+                        tooltip: true,
                     },
                     {
                         title: '操作',
@@ -89,21 +89,37 @@
                     }
                 ],
                 tableData: [],
-                total: "0",
                 weight: null,
                 unit: null,
             };
         },
         methods: {
             add: function () {
+                if (this.weight === null || this.unit === null) {
+                    this.$Message.error("未正确输入信息!");
+                    return;
+                }
+
                 this.tableData.push({
                     weight: this.weight,
                     unit: this.unit,
                     total: (this.unit * this.weight).toFixed(2),
                 });
+                this.weight = null;
+                this.unit = null;
             },
             remove: function (index) {
-                this.tableData.splice(index, 1);
+                if (confirm("确认删除 " + (index + 1) + " 号吗?")) {
+                    this.tableData.splice(index, 1);
+                }
+            }
+        },
+        computed: {
+            total: function () {
+                let temp = this.tableData
+                    .map(x => parseFloat(x["total"]))
+                    .reduce((a, c) => a + c, 0);
+                return temp.toFixed(2).toString();
             }
         },
     }
