@@ -64,8 +64,9 @@
                     {
                         title: "价格",
                         key: "total",
-                        align: 'center',
-                        tooltip: true,
+                        // align: '',
+                        width: 100,
+                        // tooltip: true,
                     },
                     {
                         title: '操作',
