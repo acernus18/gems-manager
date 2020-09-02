@@ -95,7 +95,7 @@ function decode(code) {
         if (CodeMapper.includes(code[i])) {
             result = result * 10 + CodeMapper.indexOf(code[i]);
         } else if (RepeatMapper.includes(code[i])) {
-            result += 10 * (RepeatMapper.indexOf(code[i]) + 2 - result.toString().length);
+            result *= Math.pow(10, (RepeatMapper.indexOf(code[i]) + 2 - result.toString().length));
             break;
         }
     }
