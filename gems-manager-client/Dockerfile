@@ -2,8 +2,7 @@ FROM node as builder
 WORKDIR /app
 
 COPY . .
-#RUN npm install --registry=https://registry.npm.taobao.org 
-#RUN npm config set registry http://mirrors.cloud.tencent.com/npm/ && npm run build
+RUN npm install --registry=https://registry.npm.taobao.org
 RUN npm run build
 
 FROM nginx
