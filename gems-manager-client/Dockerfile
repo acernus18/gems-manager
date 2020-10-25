@@ -2,6 +2,7 @@ FROM node as builder
 WORKDIR /app
 
 COPY . .
+RUN npm update
 RUN npm install --registry=https://registry.npm.taobao.org
 RUN npm run build
 
