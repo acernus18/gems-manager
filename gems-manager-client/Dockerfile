@@ -3,7 +3,6 @@ WORKDIR /app
 
 COPY . .
 RUN npm install --registry=https://registry.npm.taobao.org
-RUN npm install @babel/helper-compilation-targets --save-dev
 RUN npm run build
 
 FROM nginx
