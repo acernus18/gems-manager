@@ -3,7 +3,9 @@ WORKDIR /app
 
 COPY . .
 #RUN npm install --registry=https://registry.npm.taobao.org 
-RUN npm config set registry http://mirrors.cloud.tencent.com/npm/ && npm run build
+#RUN npm config set registry http://mirrors.cloud.tencent.com/npm/ && npm run build
+RUN npm run build
+
 FROM nginx
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
