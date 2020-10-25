@@ -10,8 +10,8 @@ abstract class BaseRepository
 {
     protected function connect(): PDO
     {
-        $host = "120.78.175.39";
-        $port = "30001";
+        $host = "database";
+        $port = "3306";
         $dbname = "db_jewelry";
         $charset = "utf8";
         $dataSourceName = "mysql:host=$host;dbname=$dbname;port=$port;charset=$charset";
